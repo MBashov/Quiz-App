@@ -3,12 +3,14 @@ import { useState } from 'react'
 import StartSqreen from "./components/start-screen/StartScreen"
 import Quiz from './components/quiz/Quiz';
 import { quizData } from './data/qusetions';
+import Results from './components/results/Results';
 
 function App() {
     const [hasStarted, setHasStarted] = useState(false);
 
     const [current, setCurrent] = useState(0);
     const [score, setScore] = useState(0);
+    const [showResults, setShowResults] = useState(false);
 
     const handleStart = () => setHasStarted(true);
 
@@ -23,6 +25,8 @@ function App() {
 
         if (next < quizData.length) {
             setCurrent(next);
+        } else {
+            setShowResults(true);
         }
     }
 
@@ -32,14 +36,13 @@ function App() {
             <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
 
                 {!hasStarted ? (<StartSqreen onStart={handleStart} />)
-                    : (
-                        <Quiz
+                    : showResults ? (<Results score={score} total={quizData.length} />)
+                        : (<Quiz
                             questionData={quizData[current]}
                             questionIndex={current}
                             totalQuestions={quizData.length}
                             onAnswer={handleAnsewr}
-                        />
-                    )
+                        />)
                 }
 
             </div>
