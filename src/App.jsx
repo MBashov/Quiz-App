@@ -13,6 +13,12 @@ function App() {
     const [showResults, setShowResults] = useState(false);
 
     const handleStart = () => setHasStarted(true);
+    
+    const restartQuiz = () => {
+        setShowResults(false);
+        setScore(0);
+        setCurrent(0);
+    }
 
     const handleAnsewr = (selected) => {
 
@@ -36,12 +42,13 @@ function App() {
             <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
 
                 {!hasStarted ? (<StartSqreen onStart={handleStart} />)
-                    : showResults ? (<Results score={score} total={quizData.length} />)
+                    : showResults ? (<Results score={score} total={quizData.length} onRestart={restartQuiz} />)
                         : (<Quiz
                             questionData={quizData[current]}
                             questionIndex={current}
                             totalQuestions={quizData.length}
                             onAnswer={handleAnsewr}
+                            retry={restartQuiz}
                         />)
                 }
 
