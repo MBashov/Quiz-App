@@ -1,4 +1,5 @@
 export default function Quiz({
+    category,
     questionData,
     questionIndex,
     totalQuestions,
@@ -8,7 +9,10 @@ export default function Quiz({
 
     return (
         <div>
-            <h2 className="text-xl font-semibold mb-4">
+            <h2 className="text-xl text-center font-semibold mb-4">
+                You are taking {category} quiz
+            </h2>
+            <h2 className="text-m font-semibold mb-4">
                 Question {questionIndex + 1} of {totalQuestions}
             </h2>
             <p className="mb-4 text-gray-800">

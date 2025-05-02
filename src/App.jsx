@@ -12,29 +12,45 @@ function App() {
     const [score, setScore] = useState(0);
     const [showResults, setShowResults] = useState(false);
 
-    const handleStart = () => setHasStarted(true);
-    
+    const [category, setCategory] = useState(null);
+    const [questions, setQuestions] = useState([]);
+
+    const handleStart = (category) => {
+        setCategory(category);
+        setQuestions(quizData[category]);
+        setHasStarted(true);
+        setScore(0);
+        setCurrent(0);
+    };
+
     const restartQuiz = () => {
         setShowResults(false);
         setScore(0);
         setCurrent(0);
-    }
+    };
+
+    const changeCategory = () => {
+        setHasStarted(false);
+        setShowResults(false);
+        setScore(0);
+        setCurrent(0);
+    };
 
     const handleAnsewr = (selected) => {
 
-        const correct = quizData[current].answer;
+        const correct = questions[current].answer;
         if (correct === selected) {
             setScore((s) => s + 1);
         }
 
         const next = current + 1;
 
-        if (next < quizData.length) {
+        if (next < questions.length) {
             setCurrent(next);
         } else {
             setShowResults(true);
         }
-    }
+    };
 
 
     return (
@@ -42,11 +58,12 @@ function App() {
             <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
 
                 {!hasStarted ? (<StartSqreen onStart={handleStart} />)
-                    : showResults ? (<Results score={score} total={quizData.length} onRestart={restartQuiz} />)
+                    : showResults ? (<Results score={score} total={questions.length} onRestart={restartQuiz} onCategoryChange={changeCategory} />)
                         : (<Quiz
-                            questionData={quizData[current]}
+                            category={category}
+                            questionData={questions[current]}
                             questionIndex={current}
-                            totalQuestions={quizData.length}
+                            totalQuestions={questions.length}
                             onAnswer={handleAnsewr}
                             retry={restartQuiz}
                         />)
