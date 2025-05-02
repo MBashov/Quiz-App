@@ -54,9 +54,14 @@ function App() {
 
 
     return (
-        <div className="min-h-screen bg-gray-100 flex justify-center items-center p-4">
-            <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
-
+        <div className="min-h-screen flex justify-center items-center p-4"
+            style={{
+                backgroundImage: "url('background.jpg')",
+                backgroundSize: "100% 100%",
+                backgroundPosition: "center",
+            }}
+        >
+            <div className="p-8 rounded-lg shadow-md w-full max-w-md">
                 {!hasStarted ? (<StartSqreen onStart={handleStart} />)
                     : showResults ? (<Results score={score} total={questions.length} onRestart={restartQuiz} onCategoryChange={changeCategory} />)
                         : (<Quiz
@@ -70,7 +75,6 @@ function App() {
                 }
 
             </div>
-
         </div>
     )
 }
