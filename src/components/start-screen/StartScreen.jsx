@@ -23,6 +23,9 @@ export default function StartSqreen({ onStart }) {
                 <option value="general">General</option>
                 <option value="javascript">Javascript</option>
                 <option value="react">React</option>
+                <option value="html">HTML</option>
+                <option value="css">CSS</option>
+                <option value="python">Python</option>
             </select>
             <button
                 type="submit"
