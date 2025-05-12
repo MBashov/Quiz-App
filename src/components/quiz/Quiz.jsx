@@ -10,7 +10,7 @@ export default function Quiz({
     return (
         <div className="text-slate-100">
             <h2 className="text-xl text-center text-white font-semibold mb-14">
-                You are taking {category} quiz
+                You are taking {['html', 'css'].includes(category) ? category.toUpperCase() : category[0].toUpperCase() + category.slice(1)} quiz
             </h2>
             <p className="mb-4 text-xl">
                 {question}
